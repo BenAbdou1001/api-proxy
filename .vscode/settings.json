@@ -1,0 +1,20 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+    "java.format.settings.profile": "GoogleStyle",
+    "files.exclude": {
+        "**/target": true,
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "java.test.config": {
+        "name": "myConfiguration",
+        "workingDirectory": "${workspaceFolder}",
+        "vmArgs": [
+            "-Dfile.encoding=UTF-8"
+        ]
+    }
+}

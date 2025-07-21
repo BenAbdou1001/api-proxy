@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch ApiProxyMain",
+            "request": "launch",
+            "mainClass": "com.t24.apiproxy.main.ApiProxyMain",
+            "projectName": "api-proxy",
+            "args": ["csv", "test-data.csv"],
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Debug ApiProxyMain",
+            "request": "launch",
+            "mainClass": "com.t24.apiproxy.main.ApiProxyMain",
+            "projectName": "api-proxy",
+            "args": ["json", "test-data.json"],
+            "console": "integratedTerminal"
+        }
+    ]
+}

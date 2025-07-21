@@ -1,0 +1,61 @@
+/gitignore
+# Ignore the target directory
+/target/
+# Ignore the Maven wrapper files
+/mvnw
+/mvnw.cmd   
+# Ignore the IDE specific files
+.idea/
+*.iml
+# Ignore the log files
+*.log
+# Ignore the build files
+*.class
+# Ignore the temporary files
+*.tmp
+# Ignore the local configuration files
+*.local
+# Ignore the generated sources
+/generated-sources/
+# Ignore the test output directory
+/test-output/
+# Ignore the coverage reports
+/coverage/
+# Ignore the dependency management files
+/dependency-reduced-pom.xml
+# Ignore the JAR files
+*.jar
+# Ignore the WAR files
+*.war
+# Ignore the EAR files
+*.ear
+# Ignore the ZIP files
+*.zip
+# Ignore the tar files
+*.tar
+# Ignore the GZIP files
+*.gz
+# Ignore the BZIP2 files
+*.bz2       
+# Ignore the JAR source files
+*.jar.md5
+*.jar.sha1
+# Ignore the JAR signature files
+*.jar.asc
+# Ignore the JAR manifest files
+*.jar.MF
+# Ignore the JAR index files
+*.jar.idx
+# Ignore the JAR properties files
+*.jar.properties
+# Ignore the JAR signature files
+*.jar.sig
+# Ignore the JAR checksums
+*.jar.sha256
+# Ignore the JAR checksums
+*.jar.sha512
+# Ignore the JAR checksums
+*.jar.md5
+# Ignore the JAR checksums
+*.jar.sha1
+    
