@@ -1,49 +1,26 @@
 package com.t24.apiproxy.model;
 
 public class ApiResponse {
-    private String status;
-    private String message;
-    private Object data;
+    private int statusCode;
+    private String body;
 
-    public ApiResponse() {
+    public ApiResponse(int statusCode, String body) {
+        this.statusCode = statusCode;
+        this.body = body;
     }
 
-    public ApiResponse(String status, String message, Object data) {
-        this.status = status;
-        this.message = message;
-        this.data = data;
-    }
+    // Getters
+    public int getStatusCode() { return statusCode; }
+    public String getBody() { return body; }
+    // Setters
+    public void setStatusCode(int statusCode) { this.statusCode = statusCode; }
+    public void setBody(String body) { this.body = body; }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
-    
     @Override
     public String toString() {
         return "ApiResponse{" +
-                "status='" + status + '\'' +
-                ", message='" + message + '\'' +
-                ", data=" + data +
+                "statusCode=" + statusCode +
+                ", body='" + body + '\'' +
                 '}';
     }
 }

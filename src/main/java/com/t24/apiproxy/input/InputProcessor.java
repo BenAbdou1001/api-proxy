@@ -10,3 +10,4 @@ public class InputProcessor {
     public List<ApiRequest> processInput(String inputType, String inputData);
     public boolean validateInputFormat(String inputType, String inputData);
 }
+
