@@ -139,5 +139,160 @@ public class Configuration {
         sb.append('}');
         return sb.toString();
     }
+
+    /**
+     * Gets the GraphQL endpoint URL from configuration.
+     * 
+     * @return The GraphQL endpoint URL
+     * @throws IllegalArgumentException if the property is missing or invalid
+     */
+    public String getGraphQLEndpoint() {
+        return getRequired("graphql.endpoint");
+    }
+    
+    /**
+     * Gets the HTTP client timeout configuration.
+     * 
+     * @return Timeout in milliseconds, default 30000 (30 seconds)
+     */
+    public int getHttpTimeout() {
+        return getInt("http.timeout", 30000);
+    }
+    
+    /**
+     * Gets the HTTP connection timeout configuration.
+     * 
+     * @return Connection timeout in milliseconds, default 10000 (10 seconds)
+     */
+    public int getHttpConnectionTimeout() {
+        return getInt("http.connection.timeout", 10000);
+    }
+    
+    /**
+     * Gets the HTTP read timeout configuration.
+     * 
+     * @return Read timeout in milliseconds, default 30000 (30 seconds)
+     */
+    public int getHttpReadTimeout() {
+        return getInt("http.read.timeout", 30000);
+    }
+    
+    /**
+     * Gets the SSL verification setting.
+     * 
+     * @return true if SSL should be verified, default true
+     */
+    public boolean getSslVerify() {
+        return getBoolean("ssl.verify", true);
+    }
+    
+    /**
+     * Gets the proxy host configuration.
+     * 
+     * @return Proxy host or null if not configured
+     */
+    public String getProxyHost() {
+        return get("proxy.host", null);
+    }
+    
+    /**
+     * Gets the proxy port configuration.
+     * 
+     * @return Proxy port, default 8080
+     */
+    public int getProxyPort() {
+        return getInt("proxy.port", 8080);
+    }
+    
+    /**
+     * Gets the proxy username configuration.
+     * 
+     * @return Proxy username or null if not configured
+     */
+    public String getProxyUsername() {
+        return get("proxy.username", null);
+    }
+    
+    /**
+     * Gets the proxy password configuration.
+     * 
+     * @return Proxy password or null if not configured
+     */
+    public String getProxyPassword() {
+        return get("proxy.password", null);
+    }
+    
+    /**
+     * Gets the logging level configuration.
+     * 
+     * @return Logging level (DEBUG, INFO, WARN, ERROR), default INFO
+     */
+    public String getLoggingLevel() {
+        return get("logging.level", "INFO");
+    }
+    
+    /**
+     * Gets the logging file path configuration.
+     * 
+     * @return Logging file path or null if logging to console only
+     */
+    public String getLoggingFilePath() {
+        return get("logging.file.path", null);
+    }
+    
+    /**
+     * Gets the maximum retry count configuration.
+     * 
+     * @return Maximum retry count, default 3
+     */
+    public int getMaxRetryCount() {
+        return getInt("http.max.retry", 3);
+    }
+    
+    /**
+     * Gets the retry delay configuration.
+     * 
+     * @return Retry delay in milliseconds, default 1000 (1 second)
+     */
+    public int getRetryDelay() {
+        return getInt("http.retry.delay", 1000);
+    }
+    
+    /**
+     * Checks if a property exists in the configuration.
+     * 
+     * @param key The property key
+     * @return true if the property exists
+     */
+    public boolean hasProperty(String key) {
+        return props.containsKey(key);
+    }
+    
+    /**
+     * Gets all property keys.
+     * 
+     * @return Set of all property keys
+     */
+    public java.util.Set<String> getPropertyKeys() {
+        return props.stringPropertyNames();
+    }
+    
+    /**
+     * Validates that all required properties are present.
+     * 
+     * @param requiredKeys Array of required property keys
+     * @throws IllegalArgumentException if any required property is missing
+     */
+    public void validateRequired(String... requiredKeys) {
+        java.util.List<String> missing = new java.util.ArrayList<>();
+        for (String key : requiredKeys) {
+            if (!hasProperty(key)) {
+                missing.add(key);
+            }
+        }
+        if (!missing.isEmpty()) {
+            throw new IllegalArgumentException("Missing required configuration properties: " + missing);
+        }
+    }
 }
 

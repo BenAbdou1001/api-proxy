@@ -7,7 +7,7 @@
             "request": "launch",
             "mainClass": "com.t24.apiproxy.main.ApiProxyMain",
             "projectName": "api-proxy",
-            "args": ["csv", "test-data.csv"],
+            "args": ["./sample_requests - sample_requests.csv.csv"],
             "console": "integratedTerminal"
         },
         {

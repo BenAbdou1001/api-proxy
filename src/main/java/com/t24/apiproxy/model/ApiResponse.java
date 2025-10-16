@@ -2,120 +2,82 @@ package com.t24.apiproxy.model;
 
 import java.util.HashMap;
 import java.util.Map;
+
 public class ApiResponse {
+    // Response Information
     private int statusCode;
+    private String statusMessage; // e.g., "OK", "Not Found"
     private Map<String, String> headers = new HashMap<>();
-    private Object body;
+    private String cookies; // Cookies: name1=value1;name2=value2
+
+    // Response Body
+    private Object body; // Raw response body (JSON, XML, plain text, etc.)
+    private String contentType; // application/json, text/html, etc.
+    private long contentLength;
+
+    // Connection / Timing Info
+    private long responseTime; // total time in ms
+    private long receivedAt;   // timestamp when received
+
+    // Error Handling
+    private String errorMessage; // if exception or error occurred
+    private boolean success;     // convenience flag
+
+    // Metadata (custom info, logs, etc.)
     private Metadata meta = new Metadata();
 
-    public int getStatusCode() {
-        return statusCode;
-    }
+    // Getters
+    public int getStatusCode() { return statusCode; }
+    public String getStatusMessage() { return statusMessage; }
+    public Map<String, String> getHeaders() { return headers; }
+    public String getCookies() { return cookies; }
+    public Object getBody() { return body; }
+    public String getContentType() { return contentType; }
+    public long getContentLength() { return contentLength; }
+    public long getResponseTime() { return responseTime; }
+    public long getReceivedAt() { return receivedAt; }
+    public String getErrorMessage() { return errorMessage; }
+    public boolean isSuccess() { return success; }
+    public Metadata getMeta() { return meta; }
 
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
-    }
+    // Builder
+    public static Builder newBuilder() { return new Builder(); }
 
-    public Map<String, String> getHeaders() {
-        return headers;
-    }
-
-    public void setHeaders(Map<String, String> headers) {
-        this.headers = headers;
-    }
-
-    public Object getBody() {
-        return body;
-    }
-
-    public void setBody(Object body) {
-        this.body = body;
-    }
-
-    public Metadata getMeta() {
-        return meta;
-    }
-
-    public void setMeta(Metadata meta) {
-        this.meta = meta;
-    }
-    public static Builder newBuilder() {
-        return new Builder();
-    }
     public static class Builder {
-        private final ApiResponse response = new ApiResponse();
+        private final ApiResponse res = new ApiResponse();
 
-        public Builder statusCode(int statusCode) {
-            response.statusCode = statusCode;
-            return this;
-        }
+        public Builder statusCode(int code) { res.statusCode = code; return this; }
+        public Builder statusMessage(String msg) { res.statusMessage = msg; return this; }
+        public Builder addHeader(String key, String value) { res.headers.put(key, value); return this; }
+        public Builder headers(Map<String, String> headers) { res.headers.putAll(headers); return this; }
+        public Builder cookies(String cookies) { res.cookies = cookies; return this; }
+        public Builder body(Object body) { res.body = body; return this; }
+        public Builder contentType(String type) { res.contentType = type; return this; }
+        public Builder contentLength(long length) { res.contentLength = length; return this; }
+        public Builder responseTime(long time) { res.responseTime = time; return this; }
+        public Builder receivedAt(long timestamp) { res.receivedAt = timestamp; return this; }
+        public Builder errorMessage(String error) { res.errorMessage = error; return this; }
+        public Builder success(boolean success) { res.success = success; return this; }
+        public Builder meta(Metadata meta) { res.meta = meta; return this; }
 
-        public Builder headers(Map<String, String> headers) {
-            response.headers = headers;
-            return this;
-        }
-
-        public Builder body(Object body) {
-            response.body = body;
-            return this;
-        }
-
-        public Builder meta(Metadata meta) {
-            response.meta = meta;
-            return this;
-        }
-
-        public ApiResponse build() {
-            return response;
-        }
+        public ApiResponse build() { return res; }
     }
+
     @Override
     public String toString() {
         return "ApiResponse{" +
                 "statusCode=" + statusCode +
+                ", statusMessage='" + statusMessage + '\'' +
                 ", headers=" + headers +
+                ", cookies='" + cookies + '\'' +
                 ", body=" + body +
+                ", contentType='" + contentType + '\'' +
+                ", contentLength=" + contentLength +
+                ", responseTime=" + responseTime +
+                ", receivedAt=" + receivedAt +
+                ", errorMessage='" + errorMessage + '\'' +
+                ", success=" + success +
                 ", meta=" + meta +
                 '}';
-    }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ApiResponse that = (ApiResponse) o;
-        return statusCode == that.statusCode &&
-                headers.equals(that.headers) &&
-                (body != null ? body.equals(that.body) : that.body == null) &&
-                meta.equals(that.meta);
-    }   
-    @Override
-    public int hashCode() {
-        int result = statusCode;
-        result = 31 * result + headers.hashCode();
-        result = 31 * result + (body != null ? body.hashCode() : 0);
-        result = 31 * result + meta.hashCode();
-        return result;
-    }   
-    public static ApiResponse empty() {
-        return new ApiResponse();
-    }   
-    public static ApiResponse of(int statusCode, Map<String, String> headers, Object body, Metadata meta) {
-        return newBuilder()
-                .statusCode(statusCode)
-                .headers(headers)
-                .body(body)
-                .meta(meta)
-                .build();
-    }
-    public static ApiResponse from(ApiResponse response) {
-        if (response == null) {
-            return empty();
-        }
-        return newBuilder()
-                .statusCode(response.getStatusCode())
-                .headers(response.getHeaders())
-                .body(response.getBody())
-                .meta(response.getMeta())
-                .build();
     }
 }
